@@ -7,7 +7,7 @@ public class Program {
    }
 
    public static void main(String[] args) {
-      String entrada = "Odeio a aula de Arquitetura e Organização de Computadores";
+      String entrada = "Adoro a aula de Arquitetura e Organização de Computadores";
       Raids.printarRaid0(entrada);
       Raids.printarRaid1(entrada);
       Raids.printarRaid4(entrada);

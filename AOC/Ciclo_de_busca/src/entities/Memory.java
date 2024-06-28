@@ -42,6 +42,10 @@ public class Memory {
 			for (int i=0;i<500;i++) {
 				memoria[i]=0.0;
 			}
+			Registrador.setPc(1);
+			Registrador.setMar(0);
+			Registrador.setMbr(0.0);
+			Registrador.setIr("");
 			System.out.println("MEMÓRIA LIMPA!\n ");
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
