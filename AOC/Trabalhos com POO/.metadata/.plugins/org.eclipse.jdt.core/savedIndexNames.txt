@@ -1,0 +1,5 @@
+INDEX VERSION 1.134+C:\Users\Samuel Salvador\Downloads\Projetos\Faculdade\AOC\Trabalhos com POO\.metadata\.plugins\org.eclipse.jdt.core
+1067094681.index
+1865797976.index
+2903350095.index
+1782257305.index
