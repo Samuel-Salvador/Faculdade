@@ -1,2 +1,3 @@
-# Faculdade
- Projetos de disciplinas da Faculdade
+# 🎓 Faculdade
+ Projetos de disciplinas da Faculdade.
+ 

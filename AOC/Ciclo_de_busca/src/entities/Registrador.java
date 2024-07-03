@@ -18,7 +18,9 @@ public class Registrador {
 	public static double getMbr() {
 		return mbr;
 	}
-
+	public static void setIr(String irs) {
+		ir=irs;
+	}
 
 	public static int getMar() {
 		return mar;
