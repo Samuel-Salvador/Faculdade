@@ -7,6 +7,7 @@ import controller.InstrucaoConstructor;
 
 public abstract class Instrucao {
 	public boolean jumpConcluded;
+	
 	private int COD;
 	private int op1, op2;
 	private String resultado;
