@@ -1,5 +1,62 @@
 package entities;
 
-public class Estado {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Estado {
+	private int nome;
+	private boolean ehEstadoinicial;
+	private boolean ehEstadofinal;
+
+	List<FdT> listaFdT = new ArrayList<>();
+
+	public Estado(int nome, boolean ehEstadoinicial, boolean ehEstadofinal) {
+		super();
+		this.nome = nome;
+		this.ehEstadoinicial = ehEstadoinicial;
+		this.ehEstadofinal = ehEstadofinal;
+	}
+
+	public int getNome() {
+		return nome;
+	}
+
+	public void setNome(int nome) {
+		this.nome = nome;
+	}
+
+	public boolean isEhEstadoinicial() {
+		return ehEstadoinicial;
+	}
+
+	public void setEhEstadoinicial(boolean ehEstadoinicial) {
+		this.ehEstadoinicial = ehEstadoinicial;
+	}
+
+	public boolean isEhEstadofinal() {
+		return ehEstadofinal;
+	}
+
+	public void setEhEstadofinal(boolean ehEstadofinal) {
+		this.ehEstadofinal = ehEstadofinal;
+	}
+
+	public List<FdT> getLista() {
+		return listaFdT;
+	}
+
+	public void putOnListaFdT(FdT fdt) {
+		listaFdT.add(fdt);
+	}
+
+	public void printFdTEstado() {
+		for (FdT fdt : listaFdT) {
+			if (fdt.getLerNaFita()!=null&&fdt.getTrocarNaFita()!=null&&fdt.getDirecao()!=null)
+				System.out.printf("\t <%c,%c>;%c",fdt.getLerNaFita(),fdt.getTrocarNaFita(),fdt.getDirecao());
+			else {
+				System.out.printf("\t %d,%d",nome,listaFdT.indexOf(fdt)+1);
+			}
+		}
+		System.out.println();
+	}
 }

@@ -1,0 +1,140 @@
+package entities;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Maquina {
+	private static String alfabeto = "";
+	private static String alfabetoAuxiliar = "";
+	
+	private static int quantidadeAlfabeto;
+	private static int quantidadeAlfabetoAuxiliar;
+	private static int quantidadeEstados;
+	private static int estadoInicial;
+	private static int quantidadeEstadosFinais;
+	private static Character marcadorInicio;
+	private static Character marcadorBranco;
+	
+	private static List<Estado> listaEstados = new ArrayList<>();
+	private static List<Estado> listaEstadosFinais = new ArrayList<>();
+
+	public static int getQuantidadeAlfabeto() {
+		return quantidadeAlfabeto;
+	}
+
+	public static int getQuantidadeAlfabetoAuxiliar() {
+		return quantidadeAlfabetoAuxiliar;
+	}
+
+	public static String getAlfabeto() {
+		return alfabeto;
+	}
+
+	public static void setAlfabeto(Scanner sc) {
+		System.out.print("Informe a quantidade de letras do alfabeto: ");
+		quantidadeAlfabeto = sc.nextInt();
+		sc.nextLine();
+		for (int i = 0; i < quantidadeAlfabeto; i++) {
+			System.out.printf("Informe a %dª letra do alfabeto: ", i + 1);
+			alfabeto += sc.nextLine().charAt(0);
+		}
+	}
+
+	public static String getAlfabetoAuxiliar() {
+		return alfabetoAuxiliar;
+	}
+
+	public static void setAlfabetoAuxiliar(Scanner sc) {
+		System.out.print("Informe a quantidade de letras do alfabeto auxiliar: ");
+		quantidadeAlfabetoAuxiliar = sc.nextInt();
+		sc.nextLine();
+		for (int i = 0; i < quantidadeAlfabetoAuxiliar; i++) {
+			System.out.printf("Informe a %dª letra do alfabeto auxiliar: ", i + 1);
+			alfabetoAuxiliar += sc.nextLine().charAt(0);
+		}
+	}
+
+	public static int getQuantidadeEstados() {
+		return quantidadeEstados;
+	}
+
+	public static void setQuantidadeEstados(Scanner sc) {
+		System.out.print("Informe a quantidade de estados: ");
+		quantidadeEstados = sc.nextInt();
+		sc.nextLine();
+	}
+
+	public static int getQuantidadeEstadosFinais() {
+		return quantidadeEstadosFinais;
+	}
+
+	public static void setQuantidadeEstadosFinais(Scanner sc) {
+		System.out.print("Informe a quantidade de estados finais: ");
+		quantidadeEstadosFinais = sc.nextInt();
+		sc.nextLine();
+	}
+
+	public static int getEstadoInicial() {
+		return estadoInicial;
+	}
+
+	public static void setEstadoInicial(Scanner sc) {
+		System.out.print("Informe o estado inicial: ");
+		estadoInicial = sc.nextInt();
+		sc.nextLine();
+	}
+
+	public static Character getMarcadorInicio() {
+		return marcadorInicio;
+	}
+
+	public static void setMarcadorInicio(Scanner sc) {
+		System.out.print("Informe o marcador de início: ");
+		marcadorInicio = sc.nextLine().charAt(0);
+	}
+
+	public static Character getMarcadorBranco() {
+		return marcadorBranco;
+	}
+
+	public static void setMarcadorBranco(Scanner sc) {
+		System.out.print("Informe o marcador de branco: ");
+		marcadorBranco = sc.nextLine().charAt(0);
+	}
+
+	public static List<Estado> getListaEstados() {
+		return listaEstados;
+	}
+
+	public static void addEstado(Estado estado) {
+		listaEstados.add(estado);
+	}
+
+	public static List<Estado> getListaEstadosFinais() {
+		return listaEstadosFinais;
+	}
+
+	public static void addEstadoFinal(Estado estado) {
+		listaEstadosFinais.add(estado);
+	}
+
+	public static void printChart() {
+		System.out.println("====== Tabela de Transição ======");
+		for (int i = 0; i < getQuantidadeAlfabeto(); i++) {
+			System.out.printf("\t %c", getAlfabeto().charAt(i));
+		}
+		for (int i = 0; i < getQuantidadeAlfabetoAuxiliar(); i++) {
+			System.out.printf("\t %c", getAlfabetoAuxiliar().charAt(i));
+		}
+		System.out.printf("\t %c", getMarcadorInicio());
+		System.out.printf("\t %c \n", getMarcadorBranco());
+		for (int i = 0; i < getQuantidadeEstados(); i++) {
+			System.out.printf("S%d", i + 1);
+			listaEstados.get(i).printFdTEstado();
+			System.out.println();
+		}
+
+	}
+
+}
