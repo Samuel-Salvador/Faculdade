@@ -51,7 +51,7 @@ public class Estado {
 
 	public void printFdTEstado() {
 		for (FdT fdt : listaFdT) {
-			if (fdt.getLerNaFita()!=null&&fdt.getTrocarNaFita()!=null&&fdt.getDirecao()!=null)
+			if (fdt.getLerNaFita()!=null && fdt.getTrocarNaFita()!=null&&fdt.getDirecao()!=null)
 				System.out.printf("\t <%c,%c>;%c",fdt.getLerNaFita(),fdt.getTrocarNaFita(),fdt.getDirecao());
 			else {
 				System.out.printf("\t %d,%d",nome,listaFdT.indexOf(fdt)+1);
