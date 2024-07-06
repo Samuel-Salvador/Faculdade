@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "C:\\Users\\Samuel Salvador\\Downloads\\Projetos\\Faculdade\\EDD\\04-07\\listaSO.exe",
+            "program": "C:\\Users\\samue\\Faculdade\\EDD\\04-07\\listaSO.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

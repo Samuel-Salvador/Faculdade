@@ -3,6 +3,7 @@ package application;
 import java.util.Scanner;
 
 import controller.Dados;
+import entities.Fita;
 import entities.Maquina;
 
 public class Program {
@@ -11,7 +12,10 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("------ Máquina de Turing -----");
-		Dados.setDados(sc);
-		Maquina.printChart();
+		//while(Fita.getPalavra()!="-1") {
+			Dados.setDados(sc);
+			//Maquina.executar();
+		//}
+		
 	}
 }

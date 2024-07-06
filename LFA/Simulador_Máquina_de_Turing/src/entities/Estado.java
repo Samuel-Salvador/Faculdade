@@ -7,6 +7,7 @@ public class Estado {
 	private int nome;
 	private boolean ehEstadoinicial;
 	private boolean ehEstadofinal;
+	private static boolean tabelaExecutouUmaVez;
 
 	List<FdT> listaFdT = new ArrayList<>();
 
@@ -16,7 +17,9 @@ public class Estado {
 		this.ehEstadoinicial = ehEstadoinicial;
 		this.ehEstadofinal = ehEstadofinal;
 	}
-
+	public static void tabelaExecutouUmaVez() {
+		tabelaExecutouUmaVez=true;
+	}
 	public int getNome() {
 		return nome;
 	}
@@ -50,11 +53,14 @@ public class Estado {
 	}
 
 	public void printFdTEstado() {
+		
 		for (FdT fdt : listaFdT) {
-			if (fdt.getLerNaFita()!=null && fdt.getTrocarNaFita()!=null&&fdt.getDirecao()!=null)
+			if (fdt.getTrocarNaFita()!=null&&fdt.getDirecao()!=null)
 				System.out.printf("\t <%c,%c>;%c",fdt.getLerNaFita(),fdt.getTrocarNaFita(),fdt.getDirecao());
-			else {
-				System.out.printf("\t %d,%d",nome,listaFdT.indexOf(fdt)+1);
+			else if(tabelaExecutouUmaVez) {
+				System.out.printf("\t\t X");
+			}else{
+				System.out.printf("\t\t %d,%d",nome,listaFdT.indexOf(fdt)+1);
 			}
 		}
 		System.out.println();

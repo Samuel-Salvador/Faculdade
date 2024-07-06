@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import entities.Estado;
 import entities.FdT;
+import entities.Fita;
 import entities.Maquina;
 
 public class Dados {
@@ -47,6 +48,42 @@ public class Dados {
 			}			
 		}
 		Collections.sort(Maquina.getListaEstados(),new EstadosComparator());
-		
+		Maquina.printChart();
+		System.out.println();
+		System.out.println("Digite as transições: ");
+		System.out.println("Obs 1: Caso não haja transições, insira X.");
+		System.out.println("Obs 2: Qualquer transição inválida fará com que o campo seja anulado.");
+		System.out.println();
+		for (Estado est:	Maquina.getListaEstados()) {
+			for (FdT fdt: 	est.getLista()) {
+				System.out.println("----------------------------------");
+				try {
+					System.out.printf("Digite o estado futuro da transição: %d,%d\n",est.getNome(),est.getLista().indexOf(fdt)+1);
+					char lerNaFita;
+					if((est.getLista().indexOf(fdt)+1)<=Maquina.getQuantidadeAlfabeto()) {
+						fdt.setLerNaFita(Maquina.getAlfabeto().charAt(est.getLista().indexOf(fdt)));
+					}else if((est.getLista().indexOf(fdt)+1)<=Maquina.getQuantidadeAlfabetoAuxiliar()+Maquina.getQuantidadeAlfabeto()) {
+						fdt.setLerNaFita(Maquina.getAlfabetoAuxiliar().charAt(est.getLista().indexOf(fdt)/2));
+					}else if((est.getLista().indexOf(fdt)+1)==Maquina.getQuantidadeAlfabetoAuxiliar()+Maquina.getQuantidadeAlfabeto()+1) {
+						fdt.setLerNaFita(Maquina.getMarcadorInicio());
+					}else if((est.getLista().indexOf(fdt)+1)==Maquina.getQuantidadeAlfabetoAuxiliar()+Maquina.getQuantidadeAlfabeto()+2) {
+						fdt.setLerNaFita(Maquina.getMarcadorBranco());
+					}
+					fdt.setEstadoProximo(Integer.parseInt(sc.nextLine()));
+					System.out.printf("Digite o alfabeto futuro da transição: %d,%d\n",est.getNome(),est.getLista().indexOf(fdt)+1);
+					fdt.setTrocarNaFita(sc.nextLine().charAt(0));
+					System.out.printf("Digite a direção da transição: %d,%d (D para Direita | E para Esquerda)\n",est.getNome(),est.getLista().indexOf(fdt)+1);
+					fdt.setDirecao(sc.nextLine().charAt(0));
+				}
+				catch (NumberFormatException e) {
+					System.out.println("O campo será anulado!");
+				}	
+			}
+		}
+		Estado.tabelaExecutouUmaVez();
+		Maquina.printChart();
+		System.out.printf("Digite a palavra a ser reconhecida: ");
+		Fita.setPalavra(sc.nextLine());
+		Maquina.printChart();
 	}
 }
