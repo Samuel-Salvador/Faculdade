@@ -41,8 +41,5 @@ public class Fita {
 		}
 		System.out.println();
 		System.out.println();
-	}
-	
-	
-	
+	}	
 }

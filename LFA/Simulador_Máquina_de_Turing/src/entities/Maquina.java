@@ -139,51 +139,59 @@ public class Maquina {
 	}
 
 	public static void executar() {
-		
-		int estadoAtual = Maquina.getEstadoInicial()-1;
+
+		int estadoAtual = Maquina.getEstadoInicial() - 1;
 		int letraAtualFita = 1;
-		boolean fitaDiferenteThanPalavra=false;
-		
-		for (int i=0;i<Maquina.getListaEstados().get(estadoAtual).listaFdT.size();i++) {
+		boolean estadoAtualEhfinal = false;
+		boolean palavraAcabou=false;
+		boolean deuRuim = false;
+		for (int i = 0; i < Maquina.getListaEstados().get(estadoAtual).listaFdT.size(); i++) {
 			FdT fdt = Maquina.getListaEstados().get(estadoAtual).listaFdT.get(i);
-			if(Maquina.getListaEstados().get(estadoAtual).isEstadofinal()) {
+			if (Maquina.getListaEstados().get(estadoAtual).isEstadofinal()) {
 				break;
 			}
 			try {
 				if (Fita.getFita()[letraAtualFita] == fdt.getLerNaFita()) {
 					Fita.modifyFita(letraAtualFita, fdt.getTrocarNaFita());
-					if(fdt.getDirecao()=='D') {
+					if (fdt.getDirecao() == 'D') {
 						letraAtualFita++;
-					}
-					else letraAtualFita--;
-					estadoAtual = fdt.getEstadoProximo()-1;
-					i=-1;
+					} else
+						letraAtualFita--;
+					estadoAtual = fdt.getEstadoProximo() - 1;
+					i = -1;
 				}
-			}catch (NullPointerException e) {
+			} catch (NullPointerException e) {
 				Fita.printarFitaInicio();
 			}
-			
-			
+
 		}
-			
-		for (int j = 0; j < Fita.getPalavra().length(); j++) {
-			if(Fita.getPalavra().charAt(j)==Fita.getFita()[j+1]) {
-				fitaDiferenteThanPalavra=true;
-			}
-		}
+
 		System.out.println();
 		System.out.println("Fita modificada: ");
 		for (int j = 0; j < 50; j++) {
-			System.out.print(Fita.getFita()[j]);			
+			System.out.print(Fita.getFita()[j]);
 		}
 		System.out.println();
-		if(fitaDiferenteThanPalavra) {
+		if (!Maquina.getListaEstados().get(estadoAtual).isEstadofinal()) {
 			System.out.println();
 			System.out.println("Palavra não aceita!");
-		}else {
-			System.out.println();
-			System.out.println("Palavra aceita!");
-		}					
-		
+		} else {
+			for (int j = 0; j < 50; j++) {
+				if(Fita.getFita()[j]==Maquina.getMarcadorBranco()) {
+					palavraAcabou=true;
+				}
+				if(palavraAcabou && Fita.getFita()[j]!=Maquina.getMarcadorBranco()) {
+					System.out.println();
+					deuRuim = true;
+					System.out.println("Palavra não aceita!");
+					break;
+				}
+				
+			}
+			if(palavraAcabou && !deuRuim) {
+				System.out.println();
+				System.out.println("Palavra aceita!");
+			}
+		}
 	}
 }
