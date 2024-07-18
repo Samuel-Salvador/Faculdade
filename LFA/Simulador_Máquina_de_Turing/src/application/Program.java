@@ -12,10 +12,10 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("------ Máquina de Turing -----");
-		//while(Fita.getPalavra()!="-1") {
-			Dados.setDados(sc);
-			//Maquina.executar();
-		//}
-		
+		Dados.setDados(sc);
+		while(Fita.getPalavra()!="-1") {
+			Fita.setPalavra(sc);
+			Maquina.executar();			
+		}					
 	}
 }

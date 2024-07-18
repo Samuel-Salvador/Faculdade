@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Estado {
 	private int nome;
-	private boolean ehEstadoinicial;
-	private boolean ehEstadofinal;
+	private boolean estadoinicial;
+	private boolean estadofinal;
 	private static boolean tabelaExecutouUmaVez;
 
 	List<FdT> listaFdT = new ArrayList<>();
@@ -14,8 +14,8 @@ public class Estado {
 	public Estado(int nome, boolean ehEstadoinicial, boolean ehEstadofinal) {
 		super();
 		this.nome = nome;
-		this.ehEstadoinicial = ehEstadoinicial;
-		this.ehEstadofinal = ehEstadofinal;
+		this.estadoinicial = ehEstadoinicial;
+		this.estadofinal = ehEstadofinal;
 	}
 	public static void tabelaExecutouUmaVez() {
 		tabelaExecutouUmaVez=true;
@@ -28,20 +28,20 @@ public class Estado {
 		this.nome = nome;
 	}
 
-	public boolean isEhEstadoinicial() {
-		return ehEstadoinicial;
+	public boolean isEstadoinicial() {
+		return estadoinicial;
 	}
 
-	public void setEhEstadoinicial(boolean ehEstadoinicial) {
-		this.ehEstadoinicial = ehEstadoinicial;
+	public void setEstadoinicial(boolean ehEstadoinicial) {
+		this.estadoinicial = ehEstadoinicial;
 	}
 
-	public boolean isEhEstadofinal() {
-		return ehEstadofinal;
+	public boolean isEstadofinal() {
+		return estadofinal;
 	}
 
-	public void setEhEstadofinal(boolean ehEstadofinal) {
-		this.ehEstadofinal = ehEstadofinal;
+	public void setEstadofinal(boolean ehEstadofinal) {
+		this.estadofinal = ehEstadofinal;
 	}
 
 	public List<FdT> getLista() {

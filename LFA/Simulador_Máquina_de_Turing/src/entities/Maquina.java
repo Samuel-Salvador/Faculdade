@@ -121,7 +121,7 @@ public class Maquina {
 
 	public static void printChart() {
 		System.out.println();
-		System.out.println("\t\t\t====== Tabela de Transição ======");
+		System.out.println("\t\t\t\t====== Tabela de Transição ======");
 		for (int i = 0; i < getQuantidadeAlfabeto(); i++) {
 			System.out.printf("\t\t %c", getAlfabeto().charAt(i));
 		}
@@ -139,37 +139,51 @@ public class Maquina {
 	}
 
 	public static void executar() {
-		int e = 0;
-		int x = 0;
-		for (FdT fdt : Maquina.getListaEstados().get(e).listaFdT) {
-			if (Fita.getPalavra().charAt(x) == fdt.getLerNaFita()) {
-				Fita.modifyFita(x, fdt.getTrocarNaFita());
-				if (fdt.getEstadoProximo() != e + 1) {
-					e = fdt.getEstadoProximo();
+		
+		int estadoAtual = Maquina.getEstadoInicial()-1;
+		int letraAtualFita = 1;
+		boolean fitaDiferenteThanPalavra=false;
+		
+		for (int i=0;i<Maquina.getListaEstados().get(estadoAtual).listaFdT.size();i++) {
+			FdT fdt = Maquina.getListaEstados().get(estadoAtual).listaFdT.get(i);
+			if(Maquina.getListaEstados().get(estadoAtual).isEstadofinal()) {
+				break;
+			}
+			try {
+				if (Fita.getFita()[letraAtualFita] == fdt.getLerNaFita()) {
+					Fita.modifyFita(letraAtualFita, fdt.getTrocarNaFita());
+					if(fdt.getDirecao()=='D') {
+						letraAtualFita++;
+					}
+					else letraAtualFita--;
+					estadoAtual = fdt.getEstadoProximo()-1;
+					i=-1;
 				}
-				x++;
+			}catch (NullPointerException e) {
+				Fita.printarFitaInicio();
 			}
-			//if(fdt)
+			
+			
 		}
-		boolean fitaDiferente=false;
+			
 		for (int j = 0; j < Fita.getPalavra().length(); j++) {
-			if(Fita.getPalavra().charAt(x)!=Fita.getFita()[x]) {
-				fitaDiferente=true;
+			if(Fita.getPalavra().charAt(j)==Fita.getFita()[j+1]) {
+				fitaDiferenteThanPalavra=true;
 			}
 		}
-		if(fitaDiferente) {
-			System.out.println("Palavra não aceita!");
-		}else {
-			System.out.println("Palavra aceita!");
-		}			
+		System.out.println();
 		System.out.println("Fita modificada: ");
-		System.out.printf("%c",Maquina.getMarcadorInicio());
-		for (int j = 0; j < Fita.getPalavra().length(); j++) {
+		for (int j = 0; j < 50; j++) {
 			System.out.print(Fita.getFita()[j]);			
 		}
-		for (int j=0;j<20;j++) {
-			System.out.printf("%c",Maquina.getMarcadorBranco());
-		}
+		System.out.println();
+		if(fitaDiferenteThanPalavra) {
+			System.out.println();
+			System.out.println("Palavra não aceita!");
+		}else {
+			System.out.println();
+			System.out.println("Palavra aceita!");
+		}					
+		
 	}
-
 }

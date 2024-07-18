@@ -58,12 +58,18 @@ public class Dados {
 			for (FdT fdt: 	est.getLista()) {
 				System.out.println("----------------------------------");
 				try {
+					int posicaoAlfabetoAuxiliar=0;
 					System.out.printf("Digite o estado futuro da transição: %d,%d\n",est.getNome(),est.getLista().indexOf(fdt)+1);
-					char lerNaFita;
 					if((est.getLista().indexOf(fdt)+1)<=Maquina.getQuantidadeAlfabeto()) {
 						fdt.setLerNaFita(Maquina.getAlfabeto().charAt(est.getLista().indexOf(fdt)));
 					}else if((est.getLista().indexOf(fdt)+1)<=Maquina.getQuantidadeAlfabetoAuxiliar()+Maquina.getQuantidadeAlfabeto()) {
-						fdt.setLerNaFita(Maquina.getAlfabetoAuxiliar().charAt(est.getLista().indexOf(fdt)/2));
+						if((est.getLista().indexOf(fdt)+1)==Maquina.getQuantidadeAlfabeto()+1) {
+							fdt.setLerNaFita(Maquina.getAlfabetoAuxiliar().charAt(posicaoAlfabetoAuxiliar));
+							posicaoAlfabetoAuxiliar++;
+						}else{
+							fdt.setLerNaFita(Maquina.getAlfabetoAuxiliar().charAt(posicaoAlfabetoAuxiliar));
+							posicaoAlfabetoAuxiliar++;
+							 }			
 					}else if((est.getLista().indexOf(fdt)+1)==Maquina.getQuantidadeAlfabetoAuxiliar()+Maquina.getQuantidadeAlfabeto()+1) {
 						fdt.setLerNaFita(Maquina.getMarcadorInicio());
 					}else if((est.getLista().indexOf(fdt)+1)==Maquina.getQuantidadeAlfabetoAuxiliar()+Maquina.getQuantidadeAlfabeto()+2) {
@@ -81,9 +87,6 @@ public class Dados {
 			}
 		}
 		Estado.tabelaExecutouUmaVez();
-		Maquina.printChart();
-		System.out.printf("Digite a palavra a ser reconhecida: ");
-		Fita.setPalavra(sc.nextLine());
-		Maquina.printChart();
+		Maquina.printChart();		
 	}
 }
