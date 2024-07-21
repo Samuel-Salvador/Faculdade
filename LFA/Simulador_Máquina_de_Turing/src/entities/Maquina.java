@@ -119,6 +119,9 @@ public class Maquina {
 		listaEstadosFinais.add(estado);
 	}
 
+	
+	
+	//imprime a tabela de transição
 	public static void printChart() {
 		System.out.println();
 		System.out.println("\t\t\t\t====== Tabela de Transição ======");
@@ -137,7 +140,9 @@ public class Maquina {
 		}
 
 	}
-
+	
+	//Executa a máquina de Turing
+	
 	public static void executar() {
 
 		int estadoAtual = Maquina.getEstadoInicial() - 1;

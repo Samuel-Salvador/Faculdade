@@ -10,6 +10,7 @@ import entities.Maquina;
 
 public class Dados {
 
+	//Pega todos os dados do usuário referente a MT, inclusive instancia cada objeto 
 	public static void setDados(Scanner sc) {
 		int nomeEstadoFinal=0;
 		Maquina.setAlfabeto(sc);

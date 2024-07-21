@@ -17,6 +17,7 @@ public class Estado {
 		this.estadoinicial = ehEstadoinicial;
 		this.estadofinal = ehEstadofinal;
 	}
+	
 	public static void tabelaExecutouUmaVez() {
 		tabelaExecutouUmaVez=true;
 	}
@@ -52,6 +53,7 @@ public class Estado {
 		listaFdT.add(fdt);
 	}
 
+	// Imprime as funções de transição do estado
 	public void printFdTEstado() {
 		
 		for (FdT fdt : listaFdT) {

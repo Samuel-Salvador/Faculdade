@@ -8,6 +8,8 @@ import entities.Maquina;
 
 public class Program {
 
+	//Professor, eu sou bilingue, logo os métodos e atributos estão escritos em Portu-English.
+	// KKKKKKKKKKKKKKKKKKKKKKKKK, preciso mudar isso.
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
