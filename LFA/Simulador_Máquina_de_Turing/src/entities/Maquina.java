@@ -141,13 +141,12 @@ public class Maquina {
 
 	}
 	
-	//Executa a máquina de Turing
+	//Vê se a palavra é aceita
 	
 	public static void executar() {
 
 		int estadoAtual = Maquina.getEstadoInicial() - 1;
-		int letraAtualFita = 1;
-		boolean estadoAtualEhfinal = false;
+		int letraAtualFita = 1;		
 		boolean palavraAcabou=false;
 		boolean deuRuim = false;
 		for (int i = 0; i < Maquina.getListaEstados().get(estadoAtual).listaFdT.size(); i++) {

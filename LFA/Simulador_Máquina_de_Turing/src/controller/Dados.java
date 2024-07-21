@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import entities.Estado;
 import entities.FdT;
-import entities.Fita;
 import entities.Maquina;
 
 public class Dados {
