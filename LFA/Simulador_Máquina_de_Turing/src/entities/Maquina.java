@@ -146,9 +146,7 @@ public class Maquina {
 	public static void executar() {
 
 		int estadoAtual = Maquina.getEstadoInicial() - 1;
-		int letraAtualFita = 1;		
-		boolean palavraAcabou=false;
-		boolean deuRuim = false;
+		int letraAtualFita = 1;	
 		for (int i = 0; i < Maquina.getListaEstados().get(estadoAtual).listaFdT.size(); i++) {
 			FdT fdt = Maquina.getListaEstados().get(estadoAtual).listaFdT.get(i);
 			if (Maquina.getListaEstados().get(estadoAtual).isEstadofinal()) {
@@ -180,22 +178,11 @@ public class Maquina {
 			System.out.println();
 			System.out.println("Palavra não aceita!");
 		} else {
-			for (int j = 0; j < 50; j++) {
-				if(Fita.getFita()[j]==Maquina.getMarcadorBranco()) {
-					palavraAcabou=true;
-				}
-				if(palavraAcabou && Fita.getFita()[j]!=Maquina.getMarcadorBranco()) {
+				if(letraAtualFita==1) {
 					System.out.println();
-					deuRuim = true;
-					System.out.println("Palavra não aceita!");
-					break;
+					System.out.println("Palavra aceita!");
 				}
-				
 			}
-			if(palavraAcabou && !deuRuim) {
-				System.out.println();
-				System.out.println("Palavra aceita!");
-			}
+			
 		}
 	}
-}
