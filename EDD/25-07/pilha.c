@@ -67,11 +67,11 @@ no desempilhar(Pilha *p)
         remover = p->topo;
         p->topo = remover->prox;
         p->tamanho--;
-        return *remover;
+        return remover;
     }
     else
         printf("\nPilha esta vazia!");
-    return *remover;
+    return remover;
 }
 
 void imprimir_pilha(Pilha *p)
