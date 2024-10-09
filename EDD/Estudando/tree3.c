@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct No
+{
+    struct No *esquerda;
+    struct No *direita;
+    int conteudo;
+} No;
+
+typedef struct arvb
+{
+    No *raiz;
+} ArvB;
+
+void inserirEsquerda(No *no, int valor)
+{
+    No *novo = (No *)malloc(sizeof(No));
+    if (no->esquerda == NULL)
+    {
+        novo->direita = NULL;
+        novo->esquerda = NULL;
+        novo->conteudo = valor;
+        no->esquerda = novo;
+    }
+    else
+    {
+        if (valor < no->esquerda->conteudo)
+        {
+            inserirEsquerda(no->esquerda, valor);
+        }
+        if (valor > no->esquerda->conteudo)
+        {
+            inserirDireita(no->esquerda, valor);
+        }
+    }
+}
+void inserirDireita(No *no, int valor)
+{
+    No *novo = (No *)malloc(sizeof(No));
+    if (no->direita == NULL)
+    {
+        novo->direita = NULL;
+        novo->esquerda = NULL;
+        novo->conteudo = valor;
+        no->direita = novo;
+    }
+    else
+    {
+        if (valor < no->direita->conteudo)
+        {
+            inserirEsquerda(no->direita, valor);
+        }
+        if (valor > no->esquerda->conteudo)
+        {
+            inserirDireita(no->direita, valor);
+        }
+    }
+}
+void inserir(ArvB *arv)
+{
+    No *novo = (No *)malloc(sizeof(No));
+    printf("Digite o valor a ser inserido: ");
+    int valor;
+    scanf("%d", &valor);
+    if (arv->raiz == NULL)
+    {
+        novo->esquerda = NULL;
+        novo->direita = NULL;
+        novo->conteudo = valor;
+        arv->raiz = novo;
+    }
+    else
+    {
+        if (valor < arv->raiz->conteudo)
+        {
+            inserirEsquerda(arv->raiz, valor);
+        }
+        if (valor > arv->raiz->conteudo)
+        {
+            inserirDireita(arv->raiz, valor);
+        }
+    }
+}
+
+int contador = 0;
+void imprimirEmOrdem(No *raiz)
+{
+
+    if (raiz != NULL)
+    {
+        contador++;
+        imprimirEmOrdem(raiz->esquerda);
+        printf("%d ", raiz->conteudo);
+        imprimirEmOrdem(raiz->direita);
+    }
+    if (contador == 0)
+    {
+        printf("Arvore vazia!");
+    }
+}
+
+void imprimirPreOrdem(No *raiz)
+{
+
+    if (raiz != NULL)
+    {
+        contador++;
+        printf("%d ", raiz->conteudo);
+        imprimirPreOrdem(raiz->esquerda);
+        imprimirPreOrdem(raiz->direita);
+    }
+    if (contador == 0)
+    {
+        printf("Arvore vazia!");
+    }
+}
+
+void imprimirPosOrdem(No *raiz)
+{
+
+    if (raiz != NULL)
+    {
+        contador++;
+        imprimirPosOrdem(raiz->esquerda);
+        imprimirPosOrdem(raiz->direita);
+        printf("%d ", raiz->conteudo);
+    }
+    if (contador == 0)
+    {
+        printf("Arvore vazia!");
+    }
+}
+int main()
+{
+    int op;
+    ArvB arv;
+    arv.raiz = NULL;
+
+    do
+    {
+        printf("1 - Inserir\n");
+        printf("2 - Imprimir Em Ordem\n");
+        printf("3 - Imprimir Pre Ordem\n");
+        printf("4 - Imprimir Pos Ordem\n");
+        printf("0 - Sair\n");
+        scanf("%d", &op);
+        switch (op)
+        {
+        case 0:
+            break;
+        case 1:
+            system("cls");
+            inserir(&arv);
+            break;
+        case 2:
+            system("cls");
+            printf("Arvore Binaria: ");
+            imprimirEmOrdem(arv.raiz);
+            printf("\n");
+            break;
+        case 3:
+            system("cls");
+            printf("Arvore Binaria: ");
+            imprimirPreOrdem(arv.raiz);
+            printf("\n");
+            break;
+        case 4:
+            system("cls");
+            printf("Arvore Binaria: ");
+            imprimirPreOrdem(arv.raiz);
+            printf("\n");
+            break;
+        }
+    } while (op != 0);
+
+    return 0;
+}
