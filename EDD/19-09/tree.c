@@ -134,7 +134,6 @@ No *remover(No *raiz, int valor){
                 return NULL;
             }
             else{
-
                 if(raiz->esquerda != NULL && raiz->direita == NULL){
                     No *aux;
                     aux=raiz->esquerda;
