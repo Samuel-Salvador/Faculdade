@@ -5,8 +5,8 @@
 #include <locale.h>
 #include <string.h>
 
-    int numComparacao=0;
-    int numMovimento=0;
+    long numComparacao=0;
+    long numMovimento=0;
 
     int vec100Aleatorio[100];
     int vec1000Aleatorio[1000];
@@ -90,28 +90,42 @@ char selectionSort(int tamanho, int vec[tamanho]){
     return 's';
 }
 
-void iniciarVetores(){
-    
+void startVetores(){
+
     for(int i=0;i<100;i++){
-        bool podeContinuar=false;
-        int random=rand()%100;
-        while(!podeContinuar){
-            for(int j=0;j<i;j++){
-                if(random==vec100Aleatorio[j]){
-                    podeContinuar=true;
-                }
-            }
-        }
-        vec100Aleatorio[i]=random;
+        vec100Aleatorio[i]=i;
     }
     for(int i=0;i<1000;i++){
-        vec1000Aleatorio[i]=rand()%1000;
+        vec1000Aleatorio[i]=i;
     }    
     for(int i=0;i<10000;i++){
-        vec10000Aleatorio[i]=rand()%10000;
+        vec10000Aleatorio[i]=i;
     }
     for(int i=0;i<100000;i++){
-        vec100000Aleatorio[i]=rand()%100000;
+        vec100000Aleatorio[i]=i;
+    }
+}
+
+void ordenarMaiorMenor(){
+    int cres=0;
+    for(int i=100-1;i>=0;i--){
+        vec100Aleatorio[i]=cres;
+        cres++;
+    }
+    cres=0;
+    for(int i=1000-1;i>=0;i--){
+        vec1000Aleatorio[i]=cres;
+        cres++;
+    }    
+    cres=0;
+    for(int i=10000-1;i>=0;i--){
+        vec10000Aleatorio[i]=cres;
+        cres++;
+    }
+    cres=0;
+    for(int i=100000-1;i>=0;i--){
+        vec100000Aleatorio[i]=cres;
+        cres++;
     }
 }
 
@@ -132,29 +146,198 @@ char *setString(char sort){
     return string;
 }
 
-void imprimir(clock_t inicio, clock_t final, char sort, int tamanho){
+void imprimirNaoOrdenado(int tamanho, int vec[tamanho]){
+    printf("\nVetor antes da ordenação:  ");
+    for (int i=0;i<tamanho;i++){
+        printf("%d ",vec[i]);
+    }
+}
+
+void imprimir(clock_t inicio, clock_t final, char *string,int tamanho,int vec[tamanho]){
+    
+
     double tempo = (double)(final-inicio)/CLOCKS_PER_SEC;
-    char *string = setString(sort);
+
+    printf("\n\nVetor Ordenado:  ");
     for(int i=0;i<tamanho;i++) {
-        printf("%d ",vec100Aleatorio[i]);
+        printf("%d ",vec[i]);
     }
     
+    printf("\n\nTempo para %s de um vetor Aleatório: %f segundos\n",string,tempo);
+    printf("Quantidade de movimentações para %s de um vetor Aleatório: %ld\n",string,numMovimento);
+    printf("Quantidade de comparações para %s de um vetor Aleatório: %ld\n",string,numComparacao);
     printf("\n---------------------------------------\n\n");
-    printf("Tempo para %s de um vetor Aleatório: %f segundos\n",string,tempo);
-    printf("Quantidade de movimentações para %s de um vetor Aleatório: %d\n",string,numMovimento);
-    printf("Quantidade de comparações para %s de um vetor Aleatório: %d\n",string,numComparacao);
-    printf("---------------------------------------\n\n");
+}
+
+
+void embaralhar(int *vec,int tamanho) {
+    for (int i = tamanho - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int aux = vec[j];
+        vec[j] = vec[i];
+        vec[i] = aux;
+    }
+}
+
+void executar(char sort,int tamanho,int *vec,char tipo){
+    char *string = setString(sort);
+    clock_t inicio, final;
+    if(tipo=='s'){
+        printf("\n\t\t %s de %d Posições \n\n",string,tamanho);
+        startVetores();   
+    }
+    if(tipo=='m'){
+        ordenarMaiorMenor();   
+    }
+    if(tipo=='e'){
+        embaralhar(vec,tamanho);
+    }
+    imprimirNaoOrdenado(tamanho,vec);
+
+    if(sort=='i'){
+        inicio=clock();
+        insertionSort(tamanho,vec);      
+        final = clock();
+    }
+    if(sort=='b'){
+        inicio=clock();
+        bubbleSort(tamanho,vec);      
+        final = clock();
+    }
+    if(sort=='s'){
+        inicio=clock();
+        selectionSort(tamanho,vec);      
+        final = clock();
+    }
+
+    imprimir(inicio, final, string, tamanho, vec);
+    resetarNum();
+
 }
 
 int main(){
+
     setlocale(LC_ALL,"");
-    iniciarVetores();
 
-    clock_t inicio = clock();
-    char sort = insertionSort(100,vec100Aleatorio);      
-    clock_t final = clock();
-
-    imprimir(inicio,final,sort,100);
+     
+    //-------------------- INSERTION SORT DE 100 POSIÇÕES ------------------------
+    executar('i',100,vec100Aleatorio,'s');
+    system("pause");
     
+    executar('i',100,vec100Aleatorio,'m');
+    system("pause");
+    
+    executar('i',100,vec100Aleatorio,'e');
+    system("pause");
+    
+    //-------------------- INSERTION SORT DE 1000 POSIÇÕES ------------------------
+    executar('i',1000,vec1000Aleatorio,'s');
+    system("pause");
+
+    executar('i',1000,vec1000Aleatorio,'m');
+    system("pause");
+    
+    executar('i',1000,vec1000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- INSERTION SORT DE 10000 POSIÇÕES ------------------------
+    executar('i',10000,vec10000Aleatorio,'s');
+    system("pause");
+
+    executar('i',10000,vec10000Aleatorio,'m');
+    system("pause");
+    
+    executar('i',10000,vec10000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- INSERTION SORT DE 100000 POSIÇÕES ------------------------
+    executar('i',100000,vec100000Aleatorio,'s');
+    system("pause");
+
+    executar('i',100000,vec100000Aleatorio,'m');
+    system("pause");
+    
+    executar('i',100000,vec100000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- SELECTION SORT DE 100 POSIÇÕES ------------------------
+    executar('s',100,vec100Aleatorio,'s');
+    system("pause");
+    
+    executar('s',100,vec100Aleatorio,'m');
+    system("pause");
+    
+    executar('s',100,vec100Aleatorio,'e');
+    system("pause");
+    
+    //-------------------- SELECTION SORT DE 1000 POSIÇÕES ------------------------
+    executar('s',1000,vec1000Aleatorio,'s');
+    system("pause");
+
+    executar('s',1000,vec1000Aleatorio,'m');
+    system("pause");
+    
+    executar('s',1000,vec1000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- SELECTION SORT DE 10000 POSIÇÕES ------------------------
+    executar('s',10000,vec10000Aleatorio,'s');
+    system("pause");
+
+    executar('s',10000,vec10000Aleatorio,'m');
+    system("pause");
+    
+    executar('s',10000,vec10000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- SELECTION SORT DE 100000 POSIÇÕES ------------------------
+    executar('s',100000,vec100000Aleatorio,'s');
+    system("pause");
+
+    executar('s',100000,vec100000Aleatorio,'m');
+    system("pause");
+    
+    executar('s',100000,vec100000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- BUBBLE SORT DE 100 POSIÇÕES ------------------------
+    executar('b',100,vec100Aleatorio,'s');
+    system("pause");
+    
+    executar('b',100,vec100Aleatorio,'m');
+    system("pause");
+    
+    executar('b',100,vec100Aleatorio,'e');
+    system("pause");
+    
+    //-------------------- BUBBLE SORT DE 1000 POSIÇÕES ------------------------
+    executar('b',1000,vec1000Aleatorio,'s');
+    system("pause");
+
+    executar('b',1000,vec1000Aleatorio,'m');
+    system("pause");
+    
+    executar('b',1000,vec1000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- BUBBLE SORT DE 10000 POSIÇÕES ------------------------
+    executar('b',10000,vec10000Aleatorio,'s');
+    system("pause");
+
+    executar('b',10000,vec10000Aleatorio,'m');
+    system("pause");
+    
+    executar('b',10000,vec10000Aleatorio,'e');
+    system("pause");
+
+    //-------------------- BUBBLE SORT DE 100000 POSIÇÕES ------------------------
+    executar('b',100000,vec100000Aleatorio,'s');
+    system("pause");
+
+    executar('b',100000,vec100000Aleatorio,'m');
+    system("pause");
+    
+    executar('b',100000,vec100000Aleatorio,'e');
+    system("pause");
     return 0;
 }
