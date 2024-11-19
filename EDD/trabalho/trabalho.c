@@ -5,8 +5,8 @@
 #include <locale.h>
 #include <string.h>
 
-    long numComparacao=0;
-    long numMovimento=0;
+    unsigned long int numComparacao=0;
+    unsigned long int numMovimento=0;
 
     int vec100Aleatorio[100];
     int vec1000Aleatorio[1000];
@@ -20,9 +20,6 @@ void resetarNum(){
 char bubbleSort(int tamanho, int vec[tamanho]){
     bool troca=false;
     do{
-        if (troca){
-            numMovimento++;
-        }
         troca=false;      
         for(int j=0;j<tamanho-1;j++){
             if(vec[j]>vec[j+1]){
@@ -31,7 +28,7 @@ char bubbleSort(int tamanho, int vec[tamanho]){
                 vec[j]=vec[j+1];
                 vec[j+1]=aux;
                 troca=true;
-                numMovimento+=4;
+                numMovimento+=3;
             }
             numComparacao++;
         }
@@ -46,16 +43,15 @@ char insertionSort(int tamanho, int vec[tamanho]){
         numComparacao++;
         indice=i;
 		copia=vec[i];
-        numMovimento+=2;
 		while(indice>0 && vec[indice-1]>copia) {
-                numComparacao++;
-				vec[indice]=vec[indice-1];
-				indice--;
-                numMovimento+=2;
-			}
             numComparacao++;
-			vec[indice]=copia;
+			vec[indice]=vec[indice-1];
+			indice--;
             numMovimento++;
+		}
+        numComparacao++;
+		vec[indice]=copia;
+        numMovimento++;
     }
     numComparacao++;
     return 'i';
@@ -68,14 +64,13 @@ char selectionSort(int tamanho, int vec[tamanho]){
     while(j<tamanho){
         numComparacao++;
         menor=vec[j];
-        numMovimento++;
         for(int i=j;i<tamanho;i++){
             numComparacao++;
             if(vec[i]<=menor){
                 numComparacao++;
                 menor=vec[i];
                 indiceMenor=i;
-                numMovimento+=2;
+                numMovimento++;
             }
             numComparacao++;
         }
@@ -84,7 +79,7 @@ char selectionSort(int tamanho, int vec[tamanho]){
         vec[j]=menor;
         vec[indiceMenor]=aux;
         j++;
-        numMovimento+=4;
+        numMovimento+=2;
     }
     numComparacao++;
     return 's';
